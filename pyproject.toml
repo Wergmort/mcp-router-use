@@ -9,7 +9,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 classifiers = [
-    "Development Status :: 1 - Alpha",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",

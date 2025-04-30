@@ -4,18 +4,12 @@
 
 <h1 align="center">Unified MCP Client Library </h1>
 
-[![](https://img.shields.io/pypi/dw/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
-[![PyPI Version](https://img.shields.io/pypi/v/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
-[![Documentation](https://img.shields.io/badge/docs-mcp--use.io-blue)](https://docs.mcp-router.net)
-[![Website](https://img.shields.io/badge/website-mcp--use.io-blue)](https://mcp-use.io)
-[![License](https://img.shields.io/github/license/pietrozullo/mcp-use)](https://github.com/mcp-router/mcp-router-use/blob/main/LICENSE)
-[![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![GitHub stars](https://img.shields.io/github/stars/pietrozullo/mcp-use?style=social)](https://github.com/mcp-router/mcp-router-use/stargazers)
-[![Twitter Follow](https://img.shields.io/twitter/follow/Pietro?style=social)](https://x.com/pietrozullo)
 
-🌐 MCP-Router-Use is the open source way to connect **any LLM to any MCP server** and build custom agents that have tool access, without using closed source or application clients.
+[![Twitter Follow](https://img.shields.io/twitter/follow/mcp_router?style=social)](https://x.com/mcp_router)
+[![GitHub stars](https://img.shields.io/github/stars/mcp-router/mcp-router-use?style=social)](https://github.com/mcp-router/mcp-router-use/stargazers)
+[![License](https://img.shields.io/github/license/mcp-router/mcp-router-use)](https://github.com/mcp-router/mcp-router-use/blob/main/LICENSE)
+
+🌐 MCP-Router-Use is a fork of the original mcp-use project, designed to provide a unified client library for centralized management of MCP servers, with support for tracking request history.
 
 💡 Let developers easily connect any LLM to tools like web browsing, file operations, and more.
 
@@ -39,7 +33,7 @@
 With pip:
 
 ```bash
-pip install mcp-use
+pip install mcp-router-use
 ```
 
 Or install from source:
@@ -568,7 +562,7 @@ This is useful when you only need to see the agent's steps and decision-making p
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=pietrozullo/mcp-use&type=Date)](https://www.star-history.com/#pietrozullo/mcp-use&Date)
+![Star History Chart](https://api.star-history.com/svg?repos=mcp-router/mcp-router-use&type=Date)
 
 # Contributing
 
@@ -586,7 +580,7 @@ If you use MCP-Router-Use in your research or project, please cite:
 
 ```bibtex
 @software{mcp_router_use2025,
-  author = {Zullo, Pietro},
+  author = {Zullo, Pietro, MCP Router},
   title = {MCP-Router-Use: MCP Library for Python},
   year = {2025},
   publisher = {GitHub},

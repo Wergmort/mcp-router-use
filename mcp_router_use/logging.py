@@ -1,7 +1,7 @@
 """
-Logger module for mcp_use.
+Logger module for mcp_router_use.
 
-This module provides a centralized logging configuration for the mcp_use library,
+This module provides a centralized logging configuration for the mcp_router_use library,
 with customizable log levels and formatters.
 """
 
@@ -12,11 +12,11 @@ import sys
 from langchain.globals import set_debug as langchain_set_debug
 
 # Global debug flag - can be set programmatically or from environment
-MCP_USE_DEBUG = False
+mcp_router_use_DEBUG = False
 
 
 class Logger:
-    """Centralized logger for mcp_use.
+    """Centralized logger for mcp_router_use.
 
     This class provides logging functionality with configurable levels,
     formatters, and handlers.
@@ -29,11 +29,11 @@ class Logger:
     _loggers = {}
 
     @classmethod
-    def get_logger(cls, name: str = "mcp_use") -> logging.Logger:
+    def get_logger(cls, name: str = "mcp_router_use") -> logging.Logger:
         """Get a logger instance for the specified name.
 
         Args:
-            name: Logger name, usually the module name (defaults to 'mcp_use')
+            name: Logger name, usually the module name (defaults to 'mcp_router_use')
 
         Returns:
             Configured logger instance
@@ -55,11 +55,11 @@ class Logger:
         log_to_console: bool = True,
         log_to_file: str | None = None,
     ) -> None:
-        """Configure the root mcp_use logger.
+        """Configure the root mcp_router_use logger.
 
         Args:
-            level: Log level (default: DEBUG if MCP_USE_DEBUG is 2,
-            INFO if MCP_USE_DEBUG is 1,
+            level: Log level (default: DEBUG if mcp_router_use_DEBUG is 2,
+            INFO if mcp_router_use_DEBUG is 1,
             otherwise WARNING)
             format_str: Log format string (default: DEFAULT_FORMAT)
             log_to_console: Whether to log to console (default: True)
@@ -69,9 +69,9 @@ class Logger:
 
         # Set level based on debug settings if not explicitly provided
         if level is None:
-            if MCP_USE_DEBUG == 2:
+            if mcp_router_use_DEBUG == 2:
                 level = logging.DEBUG
-            elif MCP_USE_DEBUG == 1:
+            elif mcp_router_use_DEBUG == 1:
                 level = logging.INFO
             else:
                 level = logging.WARNING
@@ -111,8 +111,8 @@ class Logger:
         Args:
             debug_level: Debug level (0=off, 1=info, 2=debug)
         """
-        global MCP_USE_DEBUG
-        MCP_USE_DEBUG = debug_level
+        global mcp_router_use_DEBUG
+        mcp_router_use_DEBUG = debug_level
 
         # Update log level for existing loggers
         if debug_level == 2:
@@ -133,9 +133,9 @@ class Logger:
 # Check environment variable for debug flag
 debug_env = os.environ.get("DEBUG", "").lower()
 if debug_env == "2":
-    MCP_USE_DEBUG = 2
+    mcp_router_use_DEBUG = 2
 elif debug_env == "1":
-    MCP_USE_DEBUG = 1
+    mcp_router_use_DEBUG = 1
 
 # Configure default logger
 Logger.configure()

@@ -1,7 +1,7 @@
 """
-HTTP Example for mcp_use.
+HTTP Example for mcp_router_use.
 
-This example demonstrates how to use the mcp_use library with MCPClient
+This example demonstrates how to use the mcp_router_use library with MCPClient
 to connect to an MCP server running on a specific HTTP port.
 
 Before running this example, you need to start the Playwright MCP server
@@ -21,7 +21,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 
 async def main():

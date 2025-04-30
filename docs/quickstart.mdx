@@ -1,31 +1,31 @@
 ---
 title: Quickstart
-description: "Get started with mcp_use in minutes"
+description: "Get started with mcp_router_use in minutes"
 ---
 
 # Quickstart Guide
 
-This guide will help you get started with mcp_use quickly. We'll cover installation, basic configuration, and running your first agent.
+This guide will help you get started with mcp_router_use quickly. We'll cover installation, basic configuration, and running your first agent.
 
 ## Installation
 
-You can install mcp_use using pip:
+You can install mcp_router_use using pip:
 
 ```bash
-pip install mcp-use
+pip install mcp-router-use
 ```
 
 Or install from source:
 
 ```bash
-git clone https://github.com/pietrozullo/mcp-use.git
-cd mcp-use
+git clone https://github.com/mcp-router/mcp-router-use.git
+cd mcp-router-use
 pip install -e .
 ```
 
 ## Installing LangChain Providers
 
-mcp_use works with various LLM providers through LangChain. You'll need to install the appropriate LangChain provider package for your chosen LLM. For example:
+mcp_router_use works with various LLM providers through LangChain. You'll need to install the appropriate LangChain provider package for your chosen LLM. For example:
 
 ```bash
 # For OpenAI
@@ -37,7 +37,7 @@ pip install langchain-anthropic
 # For other providers, check the [LangChain chat models documentation](https://python.langchain.com/docs/integrations/chat/)
 ```
 
-> **Important**: Only models with tool calling capabilities can be used with mcp_use. Make sure your chosen model supports function calling or tool use.
+> **Important**: Only models with tool calling capabilities can be used with mcp_router_use. Make sure your chosen model supports function calling or tool use.
 
 ## Environment Setup
 
@@ -57,7 +57,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def main():
     # Load environment variables
@@ -131,8 +131,8 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-from mcp_use.client import MCPClient
-from mcp_use.adapters import LangChainAdapter
+from mcp_router_use.client import MCPClient
+from mcp_router_use.adapters import LangChainAdapter
 
 async def main():
     # Initialize client
@@ -237,7 +237,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def main():
     # Load environment variables
@@ -282,13 +282,13 @@ if __name__ == "__main__":
 
 ## Available MCP Servers
 
-mcp_use supports any MCP server, allowing you to connect to a wide range of server implementations. For a comprehensive list of available servers, check out the [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) repository.
+mcp_router_use supports any MCP server, allowing you to connect to a wide range of server implementations. For a comprehensive list of available servers, check out the [awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) repository.
 
 Each server requires its own configuration. Check the [Configuration Guide](/essentials/configuration) for details.
 
 ## HTTP Connection
 
-mcp_use now supports HTTP connections, allowing you to connect to MCP servers running on specific HTTP ports. This feature is particularly useful for integrating with web-based MCP servers.
+mcp_router_use now supports HTTP connections, allowing you to connect to MCP servers running on specific HTTP ports. This feature is particularly useful for integrating with web-based MCP servers.
 
 Here's a simple example to get you started with HTTP connections:
 
@@ -297,7 +297,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def main():
     # Load environment variables

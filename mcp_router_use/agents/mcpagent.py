@@ -17,9 +17,9 @@ from langchain_core.exceptions import OutputParserException
 from langchain_core.tools import BaseTool
 from langchain_core.utils.input import get_color_mapping
 
-from mcp_use.client import MCPClient
-from mcp_use.connectors.base import BaseConnector
-from mcp_use.session import MCPSession
+from mcp_router_use.client import MCPClient
+from mcp_router_use.connectors.base import BaseConnector
+from mcp_router_use.session import MCPSession
 
 from ..adapters.langchain_adapter import LangChainAdapter
 from ..logging import logger

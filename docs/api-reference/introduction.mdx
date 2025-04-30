@@ -1,11 +1,11 @@
 ---
 title: API Reference
-description: "Complete mcp_use API Documentation"
+description: "Complete mcp_router_use API Documentation"
 ---
 
 # API Reference
 
-This section provides comprehensive documentation for the mcp_use API, including all components, methods, their arguments, and when to use different options.
+This section provides comprehensive documentation for the mcp_router_use API, including all components, methods, their arguments, and when to use different options.
 
 ## MCPClient
 
@@ -16,7 +16,7 @@ The `MCPClient` is the core class for interacting with MCP servers. It handles c
 #### From Config File
 
 ```python
-from mcp_use import MCPClient
+from mcp_router_use import MCPClient
 
 client = MCPClient.from_config_file(config_path="config.json")
 ```
@@ -28,7 +28,7 @@ client = MCPClient.from_config_file(config_path="config.json")
 #### From Dictionary
 
 ```python
-from mcp_use import MCPClient
+from mcp_router_use import MCPClient
 
 config = {
   "mcpServers": {
@@ -115,7 +115,7 @@ The `MCPAgent` class combines an LLM with an MCPClient to create an intelligent 
 ### Initialization
 
 ```python
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 from langchain_openai import ChatOpenAI
 
 agent = MCPAgent(
@@ -154,7 +154,7 @@ agent = MCPAgent(
 
 - **llm**:
 
-  - mcp_use supports ANY LLM that is compatible with LangChain
+  - mcp_router_use supports ANY LLM that is compatible with LangChain
   - You can use models from OpenAI, Anthropic, Google, Mistral, Groq, Cohere, or any other provider with a LangChain integration
   - You can even use open source models via LlamaCpp, HuggingFace, or other interfaces
   - Custom or self-hosted models are also supported as long as they implement LangChain's interface
@@ -333,7 +333,7 @@ disallowed = agent.get_disallowed_tools()
 
 ## Error Handling
 
-mcp_use provides several exception types to handle different error scenarios:
+mcp_router_use provides several exception types to handle different error scenarios:
 
 | Exception                | Description                       | When It Occurs                      |
 | ------------------------ | --------------------------------- | ----------------------------------- |
@@ -347,7 +347,7 @@ mcp_use provides several exception types to handle different error scenarios:
 **Handling Strategies**:
 
 ```python
-from mcp_use.exceptions import MCPConnectionError, MCPTimeoutError
+from mcp_router_use.exceptions import MCPConnectionError, MCPTimeoutError
 
 try:
     result = await agent.run("Find information")
@@ -369,7 +369,7 @@ except Exception as e:
 Configure and use multiple MCP servers in a single application:
 
 ```python
-from mcp_use import MCPClient, MCPAgent
+from mcp_router_use import MCPClient, MCPAgent
 from langchain_openai import ChatOpenAI
 
 # Create client with multiple servers
@@ -408,7 +408,7 @@ Implement custom output parsers for specialized MCP servers:
 
 ```python
 from langchain.schema import OutputParser
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 class CustomOutputParser(OutputParser):
     def parse(self, text):
@@ -434,7 +434,7 @@ This approach is useful when:
 Control which tools are available to the agent:
 
 ```python
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 from langchain_openai import ChatOpenAI
 
 # Create agent with restricted tools

@@ -12,7 +12,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
 
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 
 async def run_multi_server_example():

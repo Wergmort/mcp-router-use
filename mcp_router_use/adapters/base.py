@@ -49,8 +49,8 @@ class BaseAdapter(ABC):
 
         Example:
             ```python
-            from mcp_use.client import MCPClient
-            from mcp_use.adapters import YourAdapter
+            from mcp_router_use.client import MCPClient
+            from mcp_router_use.adapters import YourAdapter
 
             client = MCPClient.from_config_file("config.json")
             tools = await YourAdapter.create_tools(client)

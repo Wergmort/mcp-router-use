@@ -22,7 +22,7 @@ When building agents that need to interact with multiple MCP servers (such as co
 The Server Manager can be enabled by setting `use_server_manager=True` during the initialization of an `MCPAgent`:
 
 ```python
-from mcp_use import MCPClient, MCPAgent
+from mcp_router_use import MCPClient, MCPAgent
 from langchain_openai import ChatOpenAI
 
 # Create client with multiple servers
@@ -170,7 +170,7 @@ The `use_tool_from_server` capability allows agents to use tools from different 
 
 ```python
 import asyncio
-from mcp_use import MCPClient, MCPAgent
+from mcp_router_use import MCPClient, MCPAgent
 from langchain_anthropic import ChatAnthropic
 
 async def main():
@@ -298,8 +298,8 @@ tool_result = await use_tool_from_server(
 If you're building a custom agent, you can also leverage the Server Manager directly:
 
 ```python
-from mcp_use import MCPClient, ServerManager
-from mcp_use.adapters.langchain_adapter import LangChainAdapter
+from mcp_router_use import MCPClient, ServerManager
+from mcp_router_use.adapters.langchain_adapter import LangChainAdapter
 
 # Create client and adapter
 client = MCPClient.from_config_file("config.json")

@@ -5,17 +5,17 @@ description: Learn how to build custom agents using MCPClient and integrate tool
 
 # Building Custom Agents
 
-MCP-Use provides flexible options for building custom agents that can utilize MCP tools. This guide will show you how to create your own agents by leveraging the existing adapters, particularly focusing on the LangChain adapter.
+MCP-Router-Use provides flexible options for building custom agents that can utilize MCP tools. This guide will show you how to create your own agents by leveraging the existing adapters, particularly focusing on the LangChain adapter.
 
 ## Overview
 
-MCP-Use allows you to:
+MCP-Router-Use allows you to:
 
 1. Access powerful tools from MCP through connectors
 2. Convert those tools to different frameworks using adapters
 3. Build custom agents that utilize these tools
 
-While MCP-Use provides a built-in `MCPAgent` class, you may want to create your own custom agent implementation for more flexibility or to integrate with other frameworks.
+While MCP-Router-Use provides a built-in `MCPAgent` class, you may want to create your own custom agent implementation for more flexibility or to integrate with other frameworks.
 
 ## Using the LangChain Adapter
 
@@ -31,8 +31,8 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-from mcp_use.client import MCPClient
-from mcp_use.adapters import LangChainAdapter
+from mcp_router_use.client import MCPClient
+from mcp_router_use.adapters import LangChainAdapter
 
 async def main():
     # Initialize the MCP client
@@ -79,11 +79,11 @@ You don't need to worry about sessions, connectors, or initialization. The adapt
 
 ## Contributing New Adapters
 
-MCP-Use welcomes contributions for integrating with different agent frameworks. The adapter architecture is designed to make this process straightforward.
+MCP-Router-Use welcomes contributions for integrating with different agent frameworks. The adapter architecture is designed to make this process straightforward.
 
 ### Adapter Architecture
 
-MCP-Use provides a `BaseAdapter` abstract class that handles most of the common functionality:
+MCP-Router-Use provides a `BaseAdapter` abstract class that handles most of the common functionality:
 - Managing tool caching
 - Loading tools from connectors
 - Handling connector initialization
@@ -100,8 +100,8 @@ Here's a simple template for creating a new adapter:
 ```python
 from typing import Any
 
-from mcp_use.adapters.base import BaseAdapter
-from mcp_use.connectors.base import BaseConnector
+from mcp_router_use.adapters.base import BaseAdapter
+from mcp_router_use.connectors.base import BaseConnector
 from your_framework import YourFrameworkTool  # Import your framework's tool class
 
 class YourFrameworkAdapter(BaseAdapter):
@@ -138,7 +138,7 @@ Once you've implemented your adapter, you can use it with the simplified API:
 
 ```python
 from your_module import YourFrameworkAdapter
-from mcp_use.client import MCPClient
+from mcp_router_use.client import MCPClient
 
 # Initialize the client
 client = MCPClient.from_config_file("config.json")
@@ -166,9 +166,9 @@ agent = your_framework.create_agent(tools=tools)
 
 ## Conclusion
 
-Building custom agents with MCP-Use offers tremendous flexibility while leveraging the power of MCP tools. By combining different connectors and adapters, you can create specialized agents tailored to specific tasks or integrate MCP capabilities into existing agent frameworks.
+Building custom agents with MCP-Router-Use offers tremendous flexibility while leveraging the power of MCP tools. By combining different connectors and adapters, you can create specialized agents tailored to specific tasks or integrate MCP capabilities into existing agent frameworks.
 
-The adapter architecture makes it easy to extend MCP-Use to support new frameworks - you just need to implement the `_convert_tool` method to bridge between MCP tools and your framework of choice.
+The adapter architecture makes it easy to extend MCP-Router-Use to support new frameworks - you just need to implement the `_convert_tool` method to bridge between MCP tools and your framework of choice.
 
 With the simplified API, you can create tools for your framework directly from an MCPClient by instantiating the appropriate adapter and calling its `create_tools` method, hiding all the complexity of session and connector management.
 

@@ -1,4 +1,4 @@
-# mcp_use/agents/prompts/templates.py
+# mcp_router_use/agents/prompts/templates.py
 
 DEFAULT_SYSTEM_PROMPT_TEMPLATE = """You are a helpful AI assistant.
 You have access to the following tools:

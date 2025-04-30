@@ -9,11 +9,11 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import aiohttp
 from mcp.types import Tool
 
-from mcp_use.connectors.http import HttpConnector
-from mcp_use.task_managers import SseConnectionManager
+from mcp_router_use.connectors.http import HttpConnector
+from mcp_router_use.task_managers import SseConnectionManager
 
 
-@patch("mcp_use.connectors.base.logger")
+@patch("mcp_router_use.connectors.base.logger")
 class TestHttpConnectorInitialization(unittest.TestCase):
     """Tests for HttpConnector initialization."""
 
@@ -78,7 +78,7 @@ class TestHttpConnectorInitialization(unittest.TestCase):
         self.assertEqual(connector.base_url, "http://localhost:8000")
 
 
-@patch("mcp_use.connectors.base.logger")
+@patch("mcp_router_use.connectors.base.logger")
 class TestHttpConnectorConnection(IsolatedAsyncioTestCase):
     """Tests for HttpConnector connection methods."""
 
@@ -95,8 +95,8 @@ class TestHttpConnectorConnection(IsolatedAsyncioTestCase):
         self.mock_client_session = MagicMock()
         self.mock_client_session.__aenter__ = AsyncMock()
 
-    @patch("mcp_use.connectors.http.SseConnectionManager")
-    @patch("mcp_use.connectors.http.ClientSession")
+    @patch("mcp_router_use.connectors.http.SseConnectionManager")
+    @patch("mcp_router_use.connectors.http.ClientSession")
     async def test_connect(self, mock_client_session_class, mock_cm_class, _):
         """Test connecting to the MCP implementation."""
         # Setup mocks
@@ -125,7 +125,7 @@ class TestHttpConnectorConnection(IsolatedAsyncioTestCase):
         self.assertEqual(self.connector._connection_manager, mock_cm_instance)
         self.assertTrue(self.connector._connected)
 
-    @patch("mcp_use.connectors.http.SseConnectionManager")
+    @patch("mcp_router_use.connectors.http.SseConnectionManager")
     async def test_connect_already_connected(self, mock_cm_class, _):
         """Test connecting when already connected."""
         # Set up the connector as already connected
@@ -137,7 +137,7 @@ class TestHttpConnectorConnection(IsolatedAsyncioTestCase):
         # Verify connection manager was not created or started
         mock_cm_class.assert_not_called()
 
-    @patch("mcp_use.connectors.http.SseConnectionManager")
+    @patch("mcp_router_use.connectors.http.SseConnectionManager")
     async def test_connect_failure(self, mock_cm_class, _):
         """Test handling connection failures."""
         # Setup mocks
@@ -188,7 +188,7 @@ class TestHttpConnectorConnection(IsolatedAsyncioTestCase):
         self.assertFalse(self.connector._connected)
 
 
-@patch("mcp_use.connectors.base.logger")
+@patch("mcp_router_use.connectors.base.logger")
 class TestHttpConnectorOperations(IsolatedAsyncioTestCase):
     """Tests for HttpConnector operations."""
 

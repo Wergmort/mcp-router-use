@@ -8,8 +8,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from mcp_use.config import create_connector_from_config, load_config_file
-from mcp_use.connectors import HttpConnector, StdioConnector, WebSocketConnector
+from mcp_router_use.config import create_connector_from_config, load_config_file
+from mcp_router_use.connectors import HttpConnector, StdioConnector, WebSocketConnector
 
 
 class TestConfigLoading(unittest.TestCase):

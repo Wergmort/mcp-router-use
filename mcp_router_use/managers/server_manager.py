@@ -1,7 +1,7 @@
 from langchain_core.tools import BaseTool
 
-from mcp_use.client import MCPClient
-from mcp_use.logging import logger
+from mcp_router_use.client import MCPClient
+from mcp_router_use.logging import logger
 
 from ..adapters.base import BaseAdapter
 from .tools import (

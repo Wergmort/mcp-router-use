@@ -1,7 +1,7 @@
 """
-Basic usage example for mcp_use.
+Basic usage example for mcp_router_use.
 
-This example demonstrates how to use the mcp_use library with MCPClient
+This example demonstrates how to use the mcp_router_use library with MCPClient
 to connect any LLM to MCP tools through a unified interface.
 
 Special Thanks to https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem
@@ -13,7 +13,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 config = {
     "mcpServers": {

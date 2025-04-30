@@ -1,11 +1,11 @@
 ---
 title: Configuration
-description: "Configure your mcp_use environment"
+description: "Configure your mcp_router_use environment"
 ---
 
 # Configuration Guide
 
-This guide covers all the configuration options available in mcp_use.
+This guide covers all the configuration options available in mcp_router_use.
 
 ## API Keys
 
@@ -48,7 +48,7 @@ or any other method you might prefer.
 
 ## MCP Server Configuration
 
-mcp_use supports any MCP server through a flexible configuration system. (For a list of awesome servers you can visit https://github.com/punkpeye/awesome-mcp-servers or https://github.com/appcypher/awesome-mcp-servers which have an amazing collection of them)
+mcp_router_use supports any MCP server through a flexible configuration system. (For a list of awesome servers you can visit https://github.com/punkpeye/awesome-mcp-servers or https://github.com/appcypher/awesome-mcp-servers which have an amazing collection of them)
 
 The configuration is defined in a JSON file with the following structure:
 
@@ -111,20 +111,20 @@ You can configure multiple MCP servers in a single configuration file, allowing 
     },
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/pietro/projects/mcp-use/"]
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/pietro/projects/mcp-router-use/"]
     }
   }
 }
 ```
 
-For a complete example of using multiple servers, see the [multi-server example](https://github.com/pietrozullo/mcp-use/blob/main/examples/multi_server_example.py) in our repository.
+For a complete example of using multiple servers, see the [multi-server example](https://github.com/mcp-router/mcp-router-use/blob/main/examples/multi_server_example.py) in our repository.
 
 ## Agent Configuration
 
 When creating an MCPAgent, you can configure several parameters:
 
 ```python
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 from langchain_openai import ChatOpenAI
 
 # Basic configuration
@@ -192,7 +192,7 @@ This feature is useful for:
 
 ## Error Handling
 
-mcp_use provides several ways to handle errors:
+mcp_router_use provides several ways to handle errors:
 
 1. **Connection Errors**: Check your MCP server configuration and ensure the server is running
 2. **Authentication Errors**: Verify your API keys are correctly set in the environment

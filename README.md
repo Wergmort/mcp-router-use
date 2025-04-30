@@ -4,18 +4,18 @@
 
 <h1 align="center">Unified MCP Client Library </h1>
 
-[![](https://img.shields.io/pypi/dw/mcp_use.svg)](https://pypi.org/project/mcp_use/)
-[![PyPI Downloads](https://img.shields.io/pypi/dm/mcp_use.svg)](https://pypi.org/project/mcp_use/)
-[![PyPI Version](https://img.shields.io/pypi/v/mcp_use.svg)](https://pypi.org/project/mcp_use/)
-[![Python Versions](https://img.shields.io/pypi/pyversions/mcp_use.svg)](https://pypi.org/project/mcp_use/)
-[![Documentation](https://img.shields.io/badge/docs-mcp--use.io-blue)](https://docs.mcp-use.io)
+[![](https://img.shields.io/pypi/dw/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
+[![PyPI Downloads](https://img.shields.io/pypi/dm/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
+[![PyPI Version](https://img.shields.io/pypi/v/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/mcp_router_use.svg)](https://pypi.org/project/mcp_router_use/)
+[![Documentation](https://img.shields.io/badge/docs-mcp--use.io-blue)](https://docs.mcp-router.net)
 [![Website](https://img.shields.io/badge/website-mcp--use.io-blue)](https://mcp-use.io)
-[![License](https://img.shields.io/github/license/pietrozullo/mcp-use)](https://github.com/pietrozullo/mcp-use/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/pietrozullo/mcp-use)](https://github.com/mcp-router/mcp-router-use/blob/main/LICENSE)
 [![Code style: Ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
-[![GitHub stars](https://img.shields.io/github/stars/pietrozullo/mcp-use?style=social)](https://github.com/pietrozullo/mcp-use/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/pietrozullo/mcp-use?style=social)](https://github.com/mcp-router/mcp-router-use/stargazers)
 [![Twitter Follow](https://img.shields.io/twitter/follow/Pietro?style=social)](https://x.com/pietrozullo)
 
-🌐 MCP-Use is the open source way to connect **any LLM to any MCP server** and build custom agents that have tool access, without using closed source or application clients.
+🌐 MCP-Router-Use is the open source way to connect **any LLM to any MCP server** and build custom agents that have tool access, without using closed source or application clients.
 
 💡 Let developers easily connect any LLM to tools like web browsing, file operations, and more.
 
@@ -27,7 +27,6 @@
 |---------|-------------|
 | 🔄 [**Ease of use**](#quick-start) | Create your first MCP capable agent you need only 6 lines of code |
 | 🤖 [**LLM Flexibility**](#installing-langchain-providers) | Works with any langchain supported LLM that supports tool calling (OpenAI, Anthropic, Groq, LLama etc.) |
-| 🌐 [**Code Builder**](https://mcp-use.io/builder) | Explore MCP capabilities and generate starter code with the interactive [code builder](https://mcp-use.io/builder). |
 | 🔗 [**HTTP Support**](#http-connection-example) | Direct connection to MCP servers running on specific HTTP ports |
 | ⚙️ [**Dynamic Server Selection**](#dynamic-server-selection-server-manager) | Agents can dynamically choose the most appropriate MCP server for a given task from the available pool |
 | 🧩 [**Multi-Server Support**](#multi-server-support) | Use multiple MCP servers simultaneously in a single agent |
@@ -46,14 +45,14 @@ pip install mcp-use
 Or install from source:
 
 ```bash
-git clone https://github.com/pietrozullo/mcp-use.git
-cd mcp-use
+git clone https://github.com/mcp-router/mcp-router-use.git
+cd mcp-router-use
 pip install -e .
 ```
 
 ### Installing LangChain Providers
 
-mcp_use works with various LLM providers through LangChain. You'll need to install the appropriate LangChain provider package for your chosen LLM. For example:
+mcp_router_use works with various LLM providers through LangChain. You'll need to install the appropriate LangChain provider package for your chosen LLM. For example:
 
 ```bash
 # For OpenAI
@@ -72,7 +71,7 @@ OPENAI_API_KEY=
 ANTHROPIC_API_KEY=
 ```
 
-> **Important**: Only models with tool calling capabilities can be used with mcp_use. Make sure your chosen model supports function calling or tool use.
+> **Important**: Only models with tool calling capabilities can be used with mcp_router_use. Make sure your chosen model supports function calling or tool use.
 
 ### Spin up your agent:
 
@@ -81,7 +80,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def main():
     # Load environment variables
@@ -155,7 +154,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def main():
     # Load environment variables
@@ -193,7 +192,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def run_airbnb_example():
     # Load environment variables
@@ -247,7 +246,7 @@ Example configuration file (`airbnb_mcp.json`):
 import asyncio
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def run_blender_example():
     # Load environment variables
@@ -281,11 +280,11 @@ if __name__ == "__main__":
 
 # Configuration File Support
 
-MCP-Use supports initialization from configuration files, making it easy to manage and switch between different MCP server setups:
+MCP-Router-Use supports initialization from configuration files, making it easy to manage and switch between different MCP server setups:
 
 ```python
 import asyncio
-from mcp_use import create_session_from_config
+from mcp_router_use import create_session_from_config
 
 async def main():
     # Create an MCP session from a config file
@@ -305,7 +304,7 @@ if __name__ == "__main__":
 
 ## HTTP Connection Example
 
-MCP-Use now supports HTTP connections, allowing you to connect to MCP servers running on specific HTTP ports. This feature is particularly useful for integrating with web-based MCP servers.
+MCP-Router-Use now supports HTTP connections, allowing you to connect to MCP servers running on specific HTTP ports. This feature is particularly useful for integrating with web-based MCP servers.
 
 Here's an example of how to use the HTTP connection feature:
 
@@ -314,7 +313,7 @@ import asyncio
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 async def main():
     """Run the example using a configuration file."""
@@ -354,7 +353,7 @@ This example demonstrates how to connect to an MCP server running on a specific 
 
 # Multi-Server Support
 
-MCP-Use allows configuring and connecting to multiple MCP servers simultaneously using the `MCPClient`. This enables complex workflows that require tools from different servers, such as web browsing combined with file operations or 3D modeling.
+MCP-Router-Use allows configuring and connecting to multiple MCP servers simultaneously using the `MCPClient`. This enables complex workflows that require tools from different servers, such as web browsing combined with file operations or 3D modeling.
 
 ## Configuration
 
@@ -405,7 +404,7 @@ When enabled, the agent intelligently selects the correct MCP server based on th
 
 ```python
 import asyncio
-from mcp_use import MCPClient, MCPAgent
+from mcp_router_use import MCPClient, MCPAgent
 from langchain_anthropic import ChatAnthropic
 
 async def main():
@@ -436,11 +435,11 @@ if __name__ == "__main__":
 
 # Tool Access Control
 
-MCP-Use allows you to restrict which tools are available to the agent, providing better security and control over agent capabilities:
+MCP-Router-Use allows you to restrict which tools are available to the agent, providing better security and control over agent capabilities:
 
 ```python
 import asyncio
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 from langchain_openai import ChatOpenAI
 
 async def main():
@@ -474,8 +473,8 @@ You can also build your own custom agent using the LangChain adapter:
 ```python
 import asyncio
 from langchain_openai import ChatOpenAI
-from mcp_use.client import MCPClient
-from mcp_use.adapters.langchain_adapter import LangChainAdapter
+from mcp_router_use.client import MCPClient
+from mcp_router_use.adapters.langchain_adapter import LangChainAdapter
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -505,7 +504,7 @@ if __name__ == "__main__":
 
 # Debugging
 
-MCP-Use provides a built-in debug mode that increases log verbosity and helps diagnose issues in your agent implementation.
+MCP-Router-Use provides a built-in debug mode that increases log verbosity and helps diagnose issues in your agent implementation.
 
 ## Enabling Debug Mode
 
@@ -528,7 +527,7 @@ This sets the debug level only for the duration of that specific Python process.
 Alternatively you can set the following environment variable to the desired logging level:
 
 ```bash
-export MCP_USE_DEBUG=1 # or 2
+export mcp_router_use_DEBUG=1 # or 2
 ```
 
 ### 2. Setting the Debug Flag Programmatically
@@ -536,11 +535,11 @@ export MCP_USE_DEBUG=1 # or 2
 You can set the global debug flag directly in your code:
 
 ```python
-import mcp_use
+import mcp_router_use
 
-mcp_use.set_debug(1)  # INFO level
+mcp_router_use.set_debug(1)  # INFO level
 # or
-mcp_use.set_debug(2)  # DEBUG level (full verbose output)
+mcp_router_use.set_debug(2)  # DEBUG level (full verbose output)
 ```
 
 ### 3. Agent-Specific Verbosity
@@ -583,15 +582,15 @@ We love contributions! Feel free to open issues for bugs or feature requests. Lo
 
 # Citation
 
-If you use MCP-Use in your research or project, please cite:
+If you use MCP-Router-Use in your research or project, please cite:
 
 ```bibtex
-@software{mcp_use2025,
+@software{mcp_router_use2025,
   author = {Zullo, Pietro},
-  title = {MCP-Use: MCP Library for Python},
+  title = {MCP-Router-Use: MCP Library for Python},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/pietrozullo/mcp-use}
+  url = {https://github.com/mcp-router/mcp-router-use}
 }
 ```
 

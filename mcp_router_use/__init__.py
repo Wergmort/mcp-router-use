@@ -1,5 +1,5 @@
 """
-mcp_use - An MCP library for LLMs.
+mcp_router_use - An MCP library for LLMs.
 
 This library provides a unified interface for connecting different LLMs
 to MCP tools through existing LangChain adapters.
@@ -11,10 +11,10 @@ from .agents.mcpagent import MCPAgent
 from .client import MCPClient
 from .config import load_config_file
 from .connectors import BaseConnector, HttpConnector, StdioConnector, WebSocketConnector
-from .logging import MCP_USE_DEBUG, Logger, logger
+from .logging import mcp_router_use_DEBUG, Logger, logger
 from .session import MCPSession
 
-__version__ = version("mcp-use")
+__version__ = version("mcp-router-use")
 
 __all__ = [
     "MCPAgent",
@@ -27,7 +27,7 @@ __all__ = [
     "create_session_from_config",
     "load_config_file",
     "logger",
-    "MCP_USE_DEBUG",
+    "mcp_router_use_DEBUG",
     "Logger",
     "set_debug",
 ]
@@ -35,7 +35,7 @@ __all__ = [
 
 # Helper function to set debug mode
 def set_debug(debug=2):
-    """Set the debug mode for mcp_use.
+    """Set the debug mode for mcp_router_use.
 
     Args:
         debug: Whether to enable debug mode (default: True)

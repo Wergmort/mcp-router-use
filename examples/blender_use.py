@@ -1,7 +1,7 @@
 """
-Blender MCP example for mcp_use.
+Blender MCP example for mcp_router_use.
 
-This example demonstrates how to use the mcp_use library with MCPClient
+This example demonstrates how to use the mcp_router_use library with MCPClient
 to connect an LLM to Blender through MCP tools via WebSocket.
 The example assumes you have installed the Blender MCP addon from:
 https://github.com/ahujasid/blender-mcp
@@ -17,7 +17,7 @@ import asyncio
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
 
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 
 async def run_blender_example():

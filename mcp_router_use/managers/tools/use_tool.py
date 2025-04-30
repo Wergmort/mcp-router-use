@@ -4,7 +4,7 @@ from typing import Any, ClassVar
 from langchain_core.tools import BaseTool
 from pydantic import BaseModel, Field
 
-from mcp_use.logging import logger
+from mcp_router_use.logging import logger
 
 from .base_tool import MCPServerTool
 

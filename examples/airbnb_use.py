@@ -1,5 +1,5 @@
 """
-Example demonstrating how to use mcp_use with Airbnb.
+Example demonstrating how to use mcp_router_use with Airbnb.
 
 This example shows how to connect an LLM to Airbnb through MCP tools
 to perform tasks like searching for accommodations.
@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
 
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 
 async def run_airbnb_example():

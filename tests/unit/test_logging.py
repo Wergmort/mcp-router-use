@@ -6,7 +6,7 @@ import logging
 import unittest
 from unittest.mock import MagicMock, patch
 
-from mcp_use.logging import Logger, logger
+from mcp_router_use.logging import Logger, logger
 
 
 class TestLogging(unittest.TestCase):
@@ -15,7 +15,7 @@ class TestLogging(unittest.TestCase):
     def test_logger_instance(self):
         """Test that logger is a properly configured logging.Logger instance."""
         self.assertIsInstance(logger, logging.Logger)
-        self.assertEqual(logger.name, "mcp_use")
+        self.assertEqual(logger.name, "mcp_router_use")
 
     def test_get_logger(self):
         """Test that get_logger returns a logger with the correct name."""

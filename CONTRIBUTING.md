@@ -1,6 +1,6 @@
-# Contributing to MCP-Use
+# Contributing to MCP-Router-Use
 
-Thank you for your interest in contributing to MCP-Use! This document provides guidelines and instructions for contributing to this project.
+Thank you for your interest in contributing to MCP-Router-Use! This document provides guidelines and instructions for contributing to this project.
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ Thank you for your interest in contributing to MCP-Use! This document provides g
 
 ### Development Environment
 
-MCP-Use requires:
+MCP-Router-Use requires:
 - Python 3.11 or later
 
 ### Installation from Source
@@ -34,8 +34,8 @@ MCP-Use requires:
 1. Fork the repository on GitHub.
 2. Clone your fork locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/mcp-use.git
-   cd mcp-use
+   git clone https://github.com/YOUR_USERNAME/mcp-router-use.git
+   cd mcp-router-use
    ```
 3. Install the package in development mode:
    ```bash
@@ -143,4 +143,4 @@ If you need help with your contribution:
 - Reach out to the maintainers
 - Check existing code for examples
 
-Thank you for contributing to MCP-Use!
+Thank you for contributing to MCP-Router-Use!

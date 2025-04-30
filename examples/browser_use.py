@@ -1,7 +1,7 @@
 """
-Basic usage example for mcp_use.
+Basic usage example for mcp_router_use.
 
-This example demonstrates how to use the mcp_use library with MCPClient
+This example demonstrates how to use the mcp_router_use library with MCPClient
 to connect any LLM to MCP tools through a unified interface.
 
 Special thanks to https://github.com/microsoft/playwright-mcp for the server.
@@ -13,7 +13,7 @@ import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-from mcp_use import MCPAgent, MCPClient
+from mcp_router_use import MCPAgent, MCPClient
 
 
 async def main():
@@ -36,7 +36,7 @@ async def main():
     # Run the query
     result = await agent.run(
         """
-        Navigate to https://github.com/mcp-use/mcp-use, give a star to the project and write
+        Navigate to https://github.com/mcp-router/mcp-router-use, give a star to the project and write
         a summary of the project.
         """,
         max_steps=30,

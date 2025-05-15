@@ -19,14 +19,14 @@
 
 | Feature | Description |
 |---------|-------------|
-| 🔄 [**Ease of use**](#quick-start) | Create your first MCP capable agent you need only 6 lines of code |
+| 🔄 [**Ease of use**](#quick-start) | Create your first MCP capable agent with only 6 lines of code |
 | 🤖 [**LLM Flexibility**](#installing-langchain-providers) | Works with any langchain supported LLM that supports tool calling (OpenAI, Anthropic, Groq, LLama etc.) |
 | 🔗 [**HTTP Support**](#http-connection-example) | Direct connection to MCP servers running on specific HTTP ports |
+| 🌐 [**MCP Router Support**](#mcp-router-support) | Connect to MCP Router for centralized management of MCP servers |
 | ⚙️ [**Dynamic Server Selection**](#dynamic-server-selection-server-manager) | Agents can dynamically choose the most appropriate MCP server for a given task from the available pool |
 | 🧩 [**Multi-Server Support**](#multi-server-support) | Use multiple MCP servers simultaneously in a single agent |
 | 🛡️ [**Tool Restrictions**](#tool-access-control) | Restrict potentially dangerous tools like file system or network access |
 | 🔧 [**Custom Agents**](#build-a-custom-agent) | Build your own agents with any framework using the LangChain adapter or create new adapters |
-
 
 # Quick start
 
@@ -138,6 +138,134 @@ Example configuration file (`browser_mcp.json`):
 
 For other settings, models, and more, check out the documentation.
 
+# MCP Router Support
+
+MCP-Router-Use now supports integration with MCP Router, which provides centralized management of MCP servers. This allows you to register, start, and manage MCP servers through a unified interface.
+
+## Using MCPRouterClient
+
+The `MCPRouterClient` class provides a unified interface for working with MCP Router:
+
+```python
+import asyncio
+from mcp_router_use import MCPRouterClient
+
+async def main():
+    # Create configuration dictionary for MCP Router
+    config = {
+        "mcpRouter": {
+            "router_url": "http://localhost:3282",  # MCP Router URL
+            # Optional auth token if required
+            # "auth_token": "your_router_auth_token"
+        },
+        "mcpServers": {
+            "puppeteer": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+                "env": {
+                    "PUPPETEER_LAUNCH_OPTIONS": "{ \"headless\": false }",
+                    "ALLOW_DANGEROUS": "true"
+                }
+            }
+        }
+    }
+
+    # Create MCP Router client
+    client = MCPRouterClient(config=config)
+
+    try:
+        # Create a session with auto-registration of the server
+        session = await client.create_session(
+            "puppeteer", 
+            auto_initialize=True,
+            auto_register=True  # This will register and start the server if needed
+        )
+        
+        print(f"Session initialized with {len(session.tools)} tools")
+        
+        # Call a tool
+        result = await session.call_tool(
+            "browser.navigate", 
+            {"url": "https://www.example.com"}
+        )
+        print(f"Navigation result: {result}")
+        
+    finally:
+        # Close all sessions
+        await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+## Auto-Registration and Starting
+
+The `MCPRouterClient` can automatically register and start servers that don't exist in the MCP Router. This is particularly useful for first-time setup or when working with dynamic server configurations:
+
+```python
+# Register a server with the MCP Router
+server_id = await client.register_server_with_router("server_name")
+
+# Start a server in the MCP Router
+started = await client.start_server_in_router("server_name")
+
+# Create a session with auto-registration
+session = await client.create_session(
+    "server_name", 
+    auto_register=True  # This handles both registration and starting
+)
+```
+
+## Working with Multiple Servers in MCP Router
+
+You can register and manage multiple servers through the MCP Router:
+
+```python
+import asyncio
+from mcp_router_use import MCPRouterClient
+from langchain_openai import ChatOpenAI
+from mcp_router_use import MCPAgent
+
+async def main():
+    # Configuration with multiple servers
+    config = {
+        "mcpRouter": {
+            "router_url": "http://localhost:3282"
+        },
+        "mcpServers": {
+            "puppeteer": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+            },
+            "web-search": {
+                "command": "npx",
+                "args": ["-y", "@modelcontextprotocol/server-web-search"]
+            }
+        }
+    }
+
+    # Create MCPRouterClient
+    client = MCPRouterClient(config=config)
+    
+    # Create LLM
+    llm = ChatOpenAI(model="gpt-4o")
+    
+    # Create agent with MCPRouterClient
+    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+    
+    try:
+        # Run query using multiple servers
+        result = await agent.run(
+            "Search for the best restaurants in Tokyo and navigate to their websites"
+        )
+        print(f"Result: {result}")
+    finally:
+        # Close all sessions
+        await client.close_all_sessions()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
 
 # Example Use Cases
 
@@ -557,6 +685,7 @@ This is useful when you only need to see the agent's steps and decision-making p
 <ul>
 <li>[x] Multiple Servers at once </li>
 <li>[x] Test remote connectors (http, ws)</li>
+<li>[x] MCP Router integration</li>
 <li>[ ] ... </li>
 </ul>
 

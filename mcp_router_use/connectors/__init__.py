@@ -7,7 +7,14 @@ through different transport mechanisms.
 
 from .base import BaseConnector
 from .http import HttpConnector
+from .router import MCPRouterConnector
 from .stdio import StdioConnector
 from .websocket import WebSocketConnector
 
-__all__ = ["BaseConnector", "StdioConnector", "WebSocketConnector", "HttpConnector"]
+__all__ = [
+    "BaseConnector", 
+    "StdioConnector", 
+    "WebSocketConnector", 
+    "HttpConnector", 
+    "MCPRouterConnector"
+]

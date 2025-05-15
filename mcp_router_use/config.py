@@ -7,7 +7,7 @@ This module provides functionality to load MCP configuration from JSON files.
 import json
 from typing import Any
 
-from .connectors import BaseConnector, HttpConnector, StdioConnector, WebSocketConnector
+from .connectors import BaseConnector, HttpConnector, MCPRouterConnector, StdioConnector, WebSocketConnector
 
 
 def load_config_file(filepath: str) -> dict[str, Any]:
@@ -32,8 +32,17 @@ def create_connector_from_config(server_config: dict[str, Any]) -> BaseConnector
     Returns:
         A configured connector instance
     """
+    # MCP Router connector
+    if "router_url" in server_config:
+        return MCPRouterConnector(
+            router_url=server_config["router_url"],
+            server_id=server_config.get("server_id"),
+            auth_token=server_config.get("auth_token"),
+            headers=server_config.get("headers"),
+        )
+        
     # Stdio connector (command-based)
-    if "command" in server_config and "args" in server_config:
+    elif "command" in server_config and "args" in server_config:
         return StdioConnector(
             command=server_config["command"],
             args=server_config["args"],

@@ -5,11 +5,9 @@ This module provides a connector for communicating with MCP Router,
 which acts as an aggregator for MCP servers.
 """
 
-import json
-import logging
+import aiohttp
 from typing import Any, Dict, List, Optional
 
-import aiohttp
 from mcp import ClientSession
 
 from ..logging import logger

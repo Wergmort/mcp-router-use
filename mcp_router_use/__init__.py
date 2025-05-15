@@ -10,15 +10,8 @@ from importlib.metadata import version
 from .agents.mcpagent import MCPAgent
 from .client import MCPClient
 from .config import load_config_file
-from .connectors import (
-    BaseConnector, 
-    HttpConnector, 
-    MCPRouterConnector,
-    StdioConnector, 
-    WebSocketConnector
-)
+from .connectors import BaseConnector, HttpConnector, MCPRouterConnector
 from .logging import mcp_router_use_DEBUG, Logger, logger
-from .router_client import MCPRouterClient
 from .session import MCPSession
 
 __version__ = version("mcp-router-use")
@@ -26,14 +19,10 @@ __version__ = version("mcp-router-use")
 __all__ = [
     "MCPAgent",
     "MCPClient",
-    "MCPRouterClient",
     "MCPSession",
     "BaseConnector",
-    "StdioConnector",
-    "WebSocketConnector",
     "HttpConnector",
     "MCPRouterConnector",
-    "create_session_from_config",
     "load_config_file",
     "logger",
     "mcp_router_use_DEBUG",

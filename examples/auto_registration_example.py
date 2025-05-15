@@ -1,9 +1,9 @@
 """
-Advanced example of MCP Router client with auto-registration.
+Advanced example of MCP Client with auto-registration through MCP Router.
 
-This example demonstrates how to use the MCP Router client with automatic server
-registration and starting. It also shows how to check if a server exists before
-registering it.
+This example demonstrates how to use the MCPClient with automatic server
+registration and starting through MCP Router. It also shows how to check 
+if a server exists before registering it.
 """
 
 import asyncio
@@ -12,7 +12,7 @@ import logging
 import os
 from typing import Dict, Any, List, Optional
 
-from mcp_router_use import MCPRouterClient, set_debug
+from mcp_router_use import MCPClient, set_debug
 
 # Set debug level (0: no debug, 1: info, 2: debug)
 set_debug(2)
@@ -44,11 +44,11 @@ CONFIG = {
 }
 
 
-async def find_server_by_name(client: MCPRouterClient, name: str) -> Optional[Dict[str, Any]]:
+async def find_server_by_name(client: MCPClient, name: str) -> Optional[Dict[str, Any]]:
     """Find a server by name in the MCP Router.
     
     Args:
-        client: The MCP Router client.
+        client: The MCPClient with Router configuration.
         name: The name to search for.
         
     Returns:
@@ -68,13 +68,13 @@ async def find_server_by_name(client: MCPRouterClient, name: str) -> Optional[Di
 
 
 async def ensure_server_running(
-    client: MCPRouterClient, 
+    client: MCPClient, 
     server_name: str
 ) -> Optional[str]:
     """Ensure a server is registered and running.
     
     Args:
-        client: The MCP Router client.
+        client: The MCPClient with Router configuration.
         server_name: The name of the server in the configuration.
         
     Returns:
@@ -123,11 +123,11 @@ async def ensure_server_running(
     return server_id
 
 
-async def list_server_tools(client: MCPRouterClient, server_name: str) -> List[Dict[str, Any]]:
+async def list_server_tools(client: MCPClient, server_name: str) -> List[Dict[str, Any]]:
     """List all tools available on a server.
     
     Args:
-        client: The MCP Router client.
+        client: The MCPClient with Router configuration.
         server_name: The name of the server.
         
     Returns:
@@ -147,8 +147,8 @@ async def list_server_tools(client: MCPRouterClient, server_name: str) -> List[D
 
 async def main():
     """Run the example."""
-    # Create MCP Router client
-    client = MCPRouterClient(config=CONFIG)
+    # Create MCPClient with Router configuration
+    client = MCPClient(config=CONFIG)
 
     try:
         # Process each server in the configuration

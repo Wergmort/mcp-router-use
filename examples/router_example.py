@@ -1,7 +1,8 @@
 """
-Example usage of MCP Router client.
+Example usage of MCP Router integration.
 
-This example demonstrates how to use the MCP Router client to manage MCP servers.
+This example demonstrates how to use the MCPClient to manage MCP servers
+through MCP Router, including registration and auto-starting.
 """
 
 import asyncio
@@ -10,7 +11,7 @@ import logging
 import os
 from typing import Dict, Any
 
-from mcp_router_use import MCPRouterClient, set_debug
+from mcp_router_use import MCPClient, set_debug
 
 # Set debug level (0: no debug, 1: info, 2: debug)
 set_debug(2)
@@ -37,8 +38,8 @@ async def main():
         }
     }
 
-    # Create MCP Router client
-    client = MCPRouterClient(config=config)
+    # Create MCPClient with Router configuration
+    client = MCPClient(config=config)
 
     try:
         # Register and start the server

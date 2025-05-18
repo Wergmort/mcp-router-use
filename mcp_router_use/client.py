@@ -447,11 +447,22 @@ class MCPClient:
     async def close_all_sessions(self) -> None:
         """Close all open sessions."""
         errors = []
-        for server_name in list(self.sessions.keys()):
+        
+        # Get a copy of server names to iterate over
+        server_names = list(self.sessions.keys())
+        
+        # Try to disconnect each session, collecting errors
+        for server_name in server_names:
             try:
-                await self.close_session(server_name)
+                await self.sessions[server_name].disconnect()
             except Exception as e:
                 errors.append(f"Failed to close session for '{server_name}': {e}")
+            finally:
+                # Always remove session even if disconnect fails
+                if server_name in self.sessions:
+                    del self.sessions[server_name]
+                if server_name in self.active_sessions:
+                    self.active_sessions.remove(server_name)
                 
         if errors:
             raise Exception("Disconnect failed")

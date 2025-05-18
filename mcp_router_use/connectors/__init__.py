@@ -7,10 +7,8 @@ through MCP Router.
 
 from .base import BaseConnector
 from .http import HttpConnector
-from .router import MCPRouterConnector
 
 __all__ = [
     "BaseConnector", 
-    "HttpConnector",
-    "MCPRouterConnector"
+    "HttpConnector"
 ]

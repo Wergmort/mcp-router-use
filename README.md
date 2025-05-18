@@ -1,10 +1,10 @@
 # MCP Router Use
 
-An SDK for using MCP Router to manage and communicate with MCP servers programmatically.
+An SDK for using MCP Router to manage and communicate with MCP servers programmatically. MCP Router Use is designed to be a drop-in replacement for [mcp-use](https://github.com/modelhouse/mcp-use), maintaining API compatibility while using MCP Router under the hood.
 
 ## Overview
 
-MCP Router Use is a Python SDK that allows you to interact with MCP servers through the MCP Router. It provides a simplified interface for:
+MCP Router Use is a Python SDK that allows you to interact with MCP servers through the MCP Router. It maintains compatibility with the mcp-use API while leveraging MCP Router's capabilities to manage servers. The SDK provides a simplified interface for:
 
 - Registering MCP servers with MCP Router
 - Starting and stopping MCP servers
@@ -265,6 +265,26 @@ Represents a session with an MCP server.
 3. **Server Registration Failure**: Make sure the server configuration is correct and the necessary packages are installed.
 
 4. **Server Start Failure**: Check the MCP Router logs for errors during server startup.
+
+## Compatibility with mcp-use
+
+MCP Router Use is designed to be a drop-in replacement for mcp-use. If you're already using mcp-use in your project, you can switch to MCP Router Use with minimal changes to your code:
+
+```python
+# Before: with mcp-use
+from mcp_use import MCPClient
+
+# After: with MCP Router Use
+from mcp_router_use import MCPClient
+```
+
+The key differences are:
+
+1. MCP Router Use communicates with MCP servers through MCP Router's `/mcp` endpoint
+2. MCP Router Use can automatically register and start servers if they don't exist
+3. MCP Router Use requires MCP Router to be running and accessible
+
+All public methods and classes maintain the same signatures and behavior, ensuring a smooth transition.
 
 ## License
 

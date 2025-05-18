@@ -10,7 +10,7 @@ from importlib.metadata import version
 from .agents.mcpagent import MCPAgent
 from .client import MCPClient
 from .config import load_config_file
-from .connectors import BaseConnector, HttpConnector, MCPRouterConnector
+from .connectors import BaseConnector, HttpConnector
 from .logging import mcp_router_use_DEBUG, Logger, logger
 from .session import MCPSession
 
@@ -22,7 +22,6 @@ __all__ = [
     "MCPSession",
     "BaseConnector",
     "HttpConnector",
-    "MCPRouterConnector",
     "load_config_file",
     "logger",
     "mcp_router_use_DEBUG",

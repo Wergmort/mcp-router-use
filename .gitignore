@@ -125,3 +125,9 @@ dmypy.json
 
 # mcp-router-use
 mcp_router_use/tree.txt
+
+# Backup files
+*.bak
+*.swp
+*.swo
+*~

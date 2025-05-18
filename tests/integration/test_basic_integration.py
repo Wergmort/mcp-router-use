@@ -7,8 +7,6 @@ This module tests only the basic connection to the /mcp endpoint.
 import os
 import pytest
 import aiohttp
-import asyncio
-from typing import Dict, Any
 from pathlib import Path
 from dotenv import load_dotenv
 

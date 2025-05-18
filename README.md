@@ -1,10 +1,10 @@
 # MCP Router Use
 
-An SDK for using MCP Router to manage and communicate with MCP servers programmatically. MCP Router Use is designed to be a drop-in replacement for [mcp-use](https://github.com/modelhouse/mcp-use), maintaining API compatibility while using MCP Router under the hood.
+SDK for managing and using MCP servers through MCP Router.
 
 ## Overview
 
-MCP Router Use is a Python SDK that allows you to interact with MCP servers through the MCP Router. It maintains compatibility with the mcp-use API while leveraging MCP Router's capabilities to manage servers. The SDK provides a simplified interface for:
+MCP Router Use is a Python SDK that allows you to interact with MCP servers through the MCP Router. It provides a simplified interface for:
 
 - Registering MCP servers with MCP Router
 - Starting and stopping MCP servers
@@ -20,6 +20,8 @@ pip install mcp-router-use
 ```
 
 ## Configuration
+
+### Configuration Object
 
 To use the SDK, you need to create a configuration object that specifies:
 
@@ -39,13 +41,43 @@ config = {
             "command": "npx",
             "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
             "env": {
-                "PUPPETEER_LAUNCH_OPTIONS": "{ \"headless\": false }",
-                "ALLOW_DANGEROUS": "true"
+                "PUPPETEER_LAUNCH_OPTIONS": "{ \"headless\": false }"
             }
         }
     }
 }
 ```
+
+### Using .env for Authentication
+
+For security, it's recommended to store your authentication token in a `.env` file instead of hardcoding it in your code:
+
+1. Create a `.env` file in your project root based on the provided `.env.example`:
+   ```
+   # MCP Router authentication token
+   MCP_ROUTER_AUTH_TOKEN=your_token_here
+   
+   # Optional: MCP Router URL (default: http://localhost:3282)
+   # MCP_ROUTER_URL=http://localhost:3282
+   ```
+
+2. Load the environment variables in your code:
+   ```python
+   import os
+   from dotenv import load_dotenv
+   
+   # Load variables from .env
+   load_dotenv()
+   
+   # Create config using environment variables
+   config = {
+       "mcpRouter": {
+           "router_url": os.environ.get("MCP_ROUTER_URL", "http://localhost:3282"),
+           "auth_token": os.environ.get("MCP_ROUTER_AUTH_TOKEN"),
+       },
+       # ...rest of your config
+   }
+   ```
 
 ## Usage
 
@@ -61,35 +93,6 @@ async def main():
     
     # Create a session with auto-registration
     session = await client.create_session("puppeteer", auto_register=True)
-    
-    # Call a tool
-    result = await session.call_tool("browser.navigate", {"url": "https://www.example.com"})
-    
-    # Disconnect when done
-    await session.disconnect()
-
-if __name__ == "__main__":
-    asyncio.run(main())
-```
-
-### Using MCPRouterClient
-
-For compatibility and convenience, the SDK also provides an `MCPRouterClient` class that enables auto-registration by default:
-
-```python
-import asyncio
-from mcp_router_use import MCPRouterClient
-
-async def main():
-    # Create a client with your configuration
-    client = MCPRouterClient(config=config)
-    
-    # Create a session (auto_register=True by default)
-    session = await client.create_session("puppeteer")
-    
-    # List available tools
-    for tool in session.tools:
-        print(f"Tool: {tool['name']} - {tool['description']}")
     
     # Call a tool
     result = await session.call_tool("browser.navigate", {"url": "https://www.example.com"})
@@ -122,84 +125,43 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Advanced Usage
+## Running Tests
 
-### Managing Servers Manually
+### Unit Tests
 
-If you need more control over server registration and startup:
+To run the unit tests:
 
-```python
-import asyncio
-from mcp_router_use import MCPClient
-
-async def main():
-    client = MCPClient(config=config)
-    
-    # Register a server manually
-    server_id = await client.register_server_with_router("puppeteer")
-    print(f"Server registered with ID: {server_id}")
-    
-    # Start the server manually
-    started = await client.start_server_in_router("puppeteer")
-    if started:
-        print("Server started successfully")
-    
-    # Get a list of all registered servers
-    servers = await client.get_router_servers()
-    for server in servers:
-        print(f"Server: {server.get('name')} - Status: {server.get('status')}")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+```bash
+pytest tests/unit
 ```
 
-### Using Multiple Servers
+### Integration Tests
 
-You can manage and use multiple MCP servers through the same client:
+To run the integration tests, you need to have MCP Router running on http://localhost:3282.
 
-```python
-import asyncio
-from mcp_router_use import MCPClient
+**Important:** For integration tests, you'll need to set up your authentication token:
 
-async def main():
-    # Configuration with multiple servers
-    config = {
-        "mcpRouter": {
-            "router_url": "http://localhost:3282",
-        },
-        "mcpServers": {
-            "puppeteer": {
-                "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
-                "env": {
-                    "PUPPETEER_LAUNCH_OPTIONS": "{ \"headless\": false }"
-                }
-            },
-            "filesystem": {
-                "command": "npx",
-                "args": ["-y", "@modelcontextprotocol/server-filesystem"],
-                "env": {}
-            }
-        }
-    }
-    
-    client = MCPClient(config=config)
-    
-    # Create sessions for different servers
-    browser_session = await client.create_session("puppeteer", auto_register=True)
-    fs_session = await client.create_session("filesystem", auto_register=True)
-    
-    # Use both sessions
-    await browser_session.call_tool("browser.navigate", {"url": "https://www.example.com"})
-    files = await fs_session.call_tool("fs.readdir", {"path": "."})
-    
-    # Disconnect sessions when done
-    await browser_session.disconnect()
-    await fs_session.disconnect()
+1. Copy the `.env.example` file to `.env` in the project root:
+   ```bash
+   cp .env.example .env
+   ```
 
-if __name__ == "__main__":
-    asyncio.run(main())
-```
+2. Edit the `.env` file to set your MCP Router authentication token:
+   ```
+   MCP_ROUTER_AUTH_TOKEN=your_actual_token_here
+   ```
+
+3. Run the integration tests:
+   ```bash
+   # Run basic integration tests
+   pytest tests/integration/test_basic_integration.py -v
+
+   # Or use the convenience script
+   ./run_basic_tests.sh  # Linux/macOS
+   run_basic_tests.bat   # Windows
+   ```
+
+The integration tests check basic connectivity to the MCP Router's `/mcp` endpoint. They will automatically use the authentication token from your `.env` file.
 
 ## API Reference
 
@@ -229,10 +191,6 @@ MCPClient(config: Union[str, Dict[str, Any], None] = None)
 - `async get_router_servers() -> List[Dict[str, Any]]`: 
   Gets a list of all servers registered with the MCP Router.
 
-### MCPRouterClient
-
-A specialized client that extends MCPClient with default auto-registration.
-
 ### MCPSession
 
 Represents a session with an MCP server.
@@ -260,31 +218,11 @@ Represents a session with an MCP server.
 
 1. **Connection Error**: Ensure MCP Router is running and accessible at the configured URL.
 
-2. **Authentication Error**: Check if your `auth_token` is correct and properly configured.
+2. **Authentication Error**: Check if your `auth_token` in the `.env` file is correct and properly configured.
 
 3. **Server Registration Failure**: Make sure the server configuration is correct and the necessary packages are installed.
 
 4. **Server Start Failure**: Check the MCP Router logs for errors during server startup.
-
-## Compatibility with mcp-use
-
-MCP Router Use is designed to be a drop-in replacement for mcp-use. If you're already using mcp-use in your project, you can switch to MCP Router Use with minimal changes to your code:
-
-```python
-# Before: with mcp-use
-from mcp_use import MCPClient
-
-# After: with MCP Router Use
-from mcp_router_use import MCPClient
-```
-
-The key differences are:
-
-1. MCP Router Use communicates with MCP servers through MCP Router's `/mcp` endpoint
-2. MCP Router Use can automatically register and start servers if they don't exist
-3. MCP Router Use requires MCP Router to be running and accessible
-
-All public methods and classes maintain the same signatures and behavior, ensuring a smooth transition.
 
 ## License
 
